@@ -104,5 +104,4 @@ SOC-style investigation workflow
 🧠 Why This Lab Matters
 SSH brute-force attacks are a common initial access technique. Detecting repeated authentication failures and correlating them by source IP is a core SOC responsibility for early attack detection.
 
-yaml
-Copy code
+
