@@ -56,6 +56,7 @@ index=main "Failed password"
 | where count >= 1
 | sort - count
 This detection supports both IPv4 and IPv6 addresses (e.g., ::1).
+![Brute Force Detection](screenshots/4_bruteforce_detection.png)
 
 
 📊 Time-Based Analysis
@@ -64,7 +65,7 @@ Failed SSH attempts were analyzed over time to identify spikes or attack pattern
 
 index=main "Failed password"
 | timechart count
-![Brute Force Detection](screenshots/4_bruteforce_detection.png)
+![Brute Force Detection](screenshots/5_failed_logins_timechart.png)
 
 🚨 Alerting – Operational Detection
 A scheduled Splunk alert was created to operationalize the brute-force detection.
