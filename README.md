@@ -45,20 +45,67 @@ Failed SSH authentication attempts were identified by searching for standard fai
 index=main "Failed password"
 
 ---
+🚨 Brute Force Detection
 
-## 🚨 Brute Force Detection
+To identify potential SSH brute-force activity, source IP addresses were extracted from raw authentication logs and aggregated to detect repeated failures from the same source.
 
-To identify potential SSH brute-force activity, source IP addresses were extracted from raw authentication logs and aggregated to detect repeated failures from the same origin.
-
-```spl
 index=main "Failed password"
 | rex "from (?<src_ip>[0-9a-fA-F:.]+)"
 | stats count by src_ip
 | where count >= 1
 | sort - count
 
+
+This detection groups failed authentication attempts by source IP, allowing identification of suspicious login behavior.
+
+Note: This extraction supports both IPv4 and IPv6 addresses (e.g., ::1), which are common in modern Linux environments.
+
+
+📊 Time-Based Analysis
+
+A timechart visualization was used to analyze failed SSH login activity over time. This helps identify spikes or recurring patterns that may indicate automated attack behavior.
+
 index=main "Failed password"
 | timechart count
 
 
+🚨 Alerting
 
+A scheduled Splunk alert was created to operationalize the brute-force detection and ensure continuous monitoring.
+
+Alert Details:
+
+Name: Brute Force SSH Detection
+
+Type: Scheduled
+
+Schedule: Every 5 minutes (cron-based)
+
+Trigger Condition: Number of results > 0
+
+Action: Add to Triggered Alerts
+
+*/5 * * * *
+
+
+🎯 Skills Demonstrated
+
+Splunk Enterprise SIEM deployment
+
+Linux authentication log ingestion
+
+SPL detection engineering
+
+Regular expression field extraction
+
+IPv4 and IPv6 log parsing
+
+SSH brute-force attack detection
+
+Scheduled alert configuration using cron
+
+SOC-style investigation and documentation
+
+🧠 Why This Lab Matters
+
+SSH brute-force attacks are a common initial access technique. Detecting repeated authentication failures and correlating them by source IP is a foundational SOC capability for identifying credential-based attacks early.
