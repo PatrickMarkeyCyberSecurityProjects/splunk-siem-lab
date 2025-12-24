@@ -64,7 +64,7 @@ Failed SSH attempts were analyzed over time to identify spikes or attack pattern
 
 index=main "Failed password"
 | timechart count
-### 🔹 2️⃣ `5_failed_logins_timechart.png`
+![Brute Force Detection](screenshots/4_bruteforce_detection.png)
 
 🚨 Alerting – Operational Detection
 A scheduled Splunk alert was created to operationalize the brute-force detection.
@@ -81,7 +81,8 @@ Action: Add to Triggered Alerts
 
 cron
 */5 * * * *
-### 🔹 3️⃣ `6_alert_config.png`
+
+![Alert Configuration](screenshots/6_alert_config.png)
 🎯 Skills Demonstrated
 Splunk Enterprise SIEM deployment
 
